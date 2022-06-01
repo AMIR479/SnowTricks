@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="card-group mt-5">
+{% for figure in figures %}
+  <div class="card mr-3">
+    <h3 class="card-title text-center">Mute</h3>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREH1acfkN3tRd5FBWBD_YHNm4doiy9gyFxCg&usqp=CAU" class="card-img-top w-50" alt="photo">
+    <div class="card-body">
+      <h3 class="card-title text-center">Mute</h3>
+      <h5>{{ figure.nom }}</h5>
+    </div>
+    <h4 class="text-muted">Prix: 350€</h4>
+    <div class="card-footer">
+      <a href="{{ path('app_figure_show', {'id': figure.id}) }}" class="btn btn-primary">Voir détails</a>
+    </div>
+    {% endfor %}
+ </div>
+{% endblock %}

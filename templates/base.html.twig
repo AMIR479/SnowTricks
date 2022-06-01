@@ -1,19 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/materia/bootstrap.min.css" integrity="sha384-B4morbeopVCSpzeC1c4nyV0d0cqvlSAfyXVfrPJa25im5p+yEN/YmhlgQP/OyMZD" crossorigin="anonymous">        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
     </head>
     <body>
-        {% block body %}{% endblock %}
-    </body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+   <div class="container-fluid">
+    <a class="navbar-brand" href="/">SnowTricks</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-dark"  href="{{path('app_figure_index')}}">Figures</a>
+        </li>
+        {% if app.user %}
+          
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{{ path('app_logout')}}">Deconnexion</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{{ path('app_login')}}">Connexion</a>
+        </li>
+         <li class="nav-item">
+          <a class="nav-link text-dark" href="{{ path('app_register')}}">Inscription</a>
+        </li>
+        {% endif %}
+        
+          
+          
+      </ul>
+      
+      
+    </div>
+  </div>
+</nav>
+<div class="container">
+{% block body %}{% endblock %}
+</div>
+<div>
+  <footer class="footer mt-5 pt-0 pb-0">
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-white">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!-- Section: Social media -->
+        <section class="mb-4">
+          <!-- Facebook -->
+          <a class="btn btn-outline-light btn-floating m-1" href="https://fr-fr.facebook.com/" role="button"><i class="fab fa-facebook-f"></i></a>
+
+          <!-- Twitter -->
+          <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/?lang=fr" role="button"><i class="fab fa-twitter"></i></a>
+
+          <!-- Linkedin -->
+          <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/uas/login-submit" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+          <!-- Github -->
+          <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/AMIR479/myblog" role="button"><i class="fab fa-github"></i></a>
+        </section>
+        <!-- Section: Social media -->
+
+
+        <!-- Section: Form -->
+
+        <!-- Section: Links -->
+        <section class="">
+          <!--Grid row-->
+          <div class="row">
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-1">
+              <h5 class="text-uppercase mb-0">Administation</h5>
+
+              <ul class="list-unstyled mb-0">
+                <li>
+                <li class="nav-item mx-0 mx-lg-1 mt-1"><a class="nav-link py-3 px-0 px-lg-3 rounded " href="#">Dashboard</a></li>
+                </li>
+
+              </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-0 mb-md-0">
+              <h5 class="text-uppercase mb-0">Accueil</h5>
+
+              <ul class="list-unstyled mb-0">
+                <li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/">Accueil</a></li>
+                </li>
+
+              </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-0 ">
+              <h5 class="text-uppercase mb-0">Toutes les figures</h5>
+
+              <ul class="list-unstyled mt-0">
+                <li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Les Figures</a></li>
+
+                </li>
+
+              </ul>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-lg-3 col-md-6 mb-0">
+              <h5 class="text-uppercase mb-0">Connexion</h5>
+
+              <ul class="list-unstyled mt-0">
+                <li>
+                <li class="nav-item mx-0 mx-lg-1 mt-0"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Connexion</a></li>
+                </li>
+
+
+              </ul>
+            </div>
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 Copyright: Amir
+
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  </footer>
+</div>
+<script type="text/javascript" src="/js/jquery.min.js"></script> 
+ <script type="text/javascript" src="/js/popper.min.js"></script> 
+ <script type="text/javascript" src="/js/bootstrap.min.js"></script> 
+    {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+    {% endblock %}    
+  </body>
 </html>
+
+

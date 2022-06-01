@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Figure{% endblock %}
+
+{% block body %}
+    <h1>{{ figure.nom }}</h1>
+    <p>{{ figure.description }}</p>
+    {% for comment in figure.comments%}
+        {{comment.contenu}}
+    {% endfor %}
+    {{form_start(form)}}
+     {{form_widget(form)}}
+     <button type="submit" class="btn btn-primary">Soumettre</button>
+     
+    {{form_end(form)}}
+{% endblock %}
