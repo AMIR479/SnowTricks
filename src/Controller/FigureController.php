@@ -99,6 +99,25 @@ class FigureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //On récupère les images transmises
+            $images = $form->get('image')->getData();
+            //On boucle sur les images
+            foreach($images as $image){
+                //on génére un nouveau  nom de fichier
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension(); 
+                // On copie le fichier dans le dossier images
+                $image->move(
+                    $this->getParameter('images_directory', $fichier)
+                );
+                //on stocke l'image dans la BDD
+                $img = new Image();
+                $img->setPhotoFilename($fichier);
+                $figure->addImage($img);
+
+               
+            }
+
             $figureRepository->add($figure, true);
 
             return $this->redirectToRoute('app_figure_index', [], Response::HTTP_SEE_OTHER);
