@@ -1,4 +1,15 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+
+    {#Vérifier si la route est 'app_figure_edit' on affiche les images #}
+    {% if app.request.attributes.get('_route') == 'app_figure_edit' %}
+    <h2>Images</h2>
+    {% for image in figure.images %}
+    <div>
+    <img src="{{asset('images/' ~ image.photoFilename)}}" alt="image" width="150">
+    <a href="{{path('figure_delete_image', {id: image.id})}}" data-delete data-token="{{csrf_token('delete' ~ image.id)}}">Supprimer</a>
+    </div>
+     {% endfor %} 
+    {% endif %}
     <button class="btn btn-primary mt-3 mb-3">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

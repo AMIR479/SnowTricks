@@ -18,19 +18,19 @@ class FigureType extends AbstractType
             ->add('description')
             ->add('groupe')
             //On ajoute le champ "image" dans le formulaire
-            ->add('image', FileType::class, [
+            ->add('images', FileType::class, [
                 'label'=> ('Ajouter des images'),
                 'multiple'=> true,
                 'mapped'=> false,
                 'required'=> false
             ])
             //On ajoute le champ "video" dans le formulaire
-            ->add('video', FileType::class, [
-                'label'=> ('Ajouter des videos'),
-                'multiple'=> true,
-                'mapped'=> false,
-                'required'=> false
-            ])
+            // ->add('video', FileType::class, [
+            //     'label'=> ('Ajouter des videos'),
+            //     'multiple'=> true,
+            //     'mapped'=> false,
+            //     'required'=> false
+            // ])
         ;
     }
 

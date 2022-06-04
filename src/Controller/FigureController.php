@@ -9,10 +9,16 @@ use App\Form\CommentType;
 use App\Form\FigureType;
 use App\Repository\CommentRepository;
 use App\Repository\FigureRepository;
+use App\Repository\ImageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
+
 
 /**
  * @Route("/figure")
@@ -40,12 +46,16 @@ class FigureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             //On récupère les images transmises
-            $images = $form->get('image')->getData();
+            $images = $form->get('images')->getData();
+
+            dd($images);
             //On boucle sur les images
             foreach($images as $image){
                 //on génére un nouveau  nom de fichier
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension(); 
+            
                 // On copie le fichier dans le dossier images
+            
                 $image->move(
                     $this->getParameter('images_directory', $fichier)
                 );
@@ -139,5 +149,31 @@ class FigureController extends AbstractController
         }
 
         return $this->redirectToRoute('app_figure_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+   
+   /**
+    * @Route("/supprime/image/{id}", name="figure_delete_image", methods={"DELETE", "POST"})
+  */
+    public function deleteImage(Image $image, Request $request, ImageRepository $imageRepository, EntityManagerInterface $entityManager)
+    {
+        $data = json_decode($request->getContent(), true);
+        // On vérifie si le token est valide
+        if($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token']))
+        {
+            //On récupère le nom de l'image
+            $nom = $image->getPhotoFilename();
+            //On supprime le fichier
+            unlink($this->getParameter('images_directory').'/'.$nom);
+           //On supprime l'entrée de la BDD 
+           $imageRepository->remove($image);
+
+            // On répond en Json
+            return new JsonResponse(['success' => 1]);
+        }
+        else
+        {
+            return new JsonResponse(['error' => 'token invalid'], 404);
+        }
     }
 }

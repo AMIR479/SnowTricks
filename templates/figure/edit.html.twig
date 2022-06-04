@@ -7,7 +7,11 @@
 
     {{ include('figure/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_figure_index') }}">back to list</a>
+    <a href="{{ path('app_figure_index') }}">Retour en arrière</a>
 
     {{ include('figure/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+ <script src="{{ asset('js/images.js')}}"></script>
 {% endblock %}
